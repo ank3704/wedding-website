@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registry | Aisling &amp; Karen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="nav-brand" href="index.html">A &amp; K</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="details.html">Details</a></li>
+      <li><a href="rsvp.html">RSVP</a></li>
+      <li><a href="registry.html" class="is-active">Registry</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" style="padding: 4rem 0 2rem;">
+    <div class="container">
+      <p class="eyebrow">With gratitude</p>
+      <h1 style="font-size: clamp(2.2rem, 6vw, 3.4rem);">Registry</h1>
+      <p class="lede center">
+        Your presence at our wedding is the greatest gift of all. If you'd like to help us
+        celebrate further, we've listed a few things below — no account needed, just click
+        through and let us know once it's on its way.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-alt" style="padding: 2.5rem 0;">
+    <div class="container">
+      <div class="card" style="max-width: 640px; margin: 0 auto;">
+        <h3>Store Registries</h3>
+        <p class="registry-desc">
+          For everyday items, we've also set up registries with major retailers —
+          browse and buy directly, no need to visit our site again.
+        </p>
+        <a href="https://www.myregistry.com/giftlist/aislingandkaren" target="_blank" rel="noopener" class="btn btn-navy">Visit Our Registry</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="center" style="margin-bottom: 2rem;">
+        <p class="eyebrow">Cash funds</p>
+        <h2>Contribute Directly</h2>
+        <p class="lede center">Every dollar goes straight to us via Venmo — no fees, no middleman.</p>
+      </div>
+      <div class="fund-grid" id="fund-grid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="center" style="margin-bottom: 2rem;">
+        <p class="eyebrow">A few favorites</p>
+        <h2>Gift Ideas</h2>
+        <p class="lede center">Click "I got this!" once you've purchased an item so others know it's spoken for.</p>
+      </div>
+
+      <div class="registry-filter" id="registry-filter"></div>
+
+      <div id="registry-status" class="center lede" style="margin: 0 auto 2rem;"></div>
+
+      <div class="registry-list" id="registry-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<div class="modal-overlay" id="claim-modal">
+  <div class="modal">
+    <h3>Claim this gift</h3>
+    <p class="lede">Let us know who's getting this so we can send a proper thank-you.</p>
+    <div class="form-row">
+      <label for="claim-name">Your name</label>
+      <input type="text" id="claim-name" required />
+    </div>
+    <div class="form-row">
+      <label for="claim-email">Email (optional)</label>
+      <input type="email" id="claim-email" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="claim-cancel" type="button">Cancel</button>
+      <button class="btn btn-primary" id="claim-confirm" type="button">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>With love, Aisling &amp; Karen <span class="heart">&hearts;</span></p>
+    <p>Questions? Reach out at [contact email or phone]</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/registry.js"></script>
+<script src="assets/js/funds.js"></script>
+</body>
+</html>

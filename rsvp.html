@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RSVP | Aisling &amp; Karen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav">
+    <a class="nav-brand" href="index.html">A &amp; K</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="details.html">Details</a></li>
+      <li><a href="rsvp.html" class="is-active">RSVP</a></li>
+      <li><a href="registry.html">Registry</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" style="padding: 4rem 0 2.5rem;">
+    <div class="container">
+      <p class="eyebrow">Kindly respond</p>
+      <h1 style="font-size: clamp(2.2rem, 6vw, 3.4rem);">RSVP</h1>
+      <p class="lede center">Please respond by <strong>[RSVP Deadline]</strong>. One RSVP per household — if you're bringing a plus-one or have kids joining, just increase the party size below.</p>
+    </div>
+  </section>
+
+  <section style="padding-top: 0;">
+    <div class="container">
+      <form id="rsvp-form" class="form">
+
+        <div class="form-row">
+          <label for="full-name">Your full name</label>
+          <input type="text" id="full-name" name="fullName" required autocomplete="name" />
+        </div>
+
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+          <p class="form-hint">We'll send a confirmation here.</p>
+        </div>
+
+        <div class="form-row">
+          <label>Will you be joining us?</label>
+          <div class="radio-group" role="radiogroup">
+            <div class="radio-pill">
+              <input type="radio" id="attending-yes" name="attending" value="Yes" required />
+              <label for="attending-yes">Joyfully accept</label>
+            </div>
+            <div class="radio-pill">
+              <input type="radio" id="attending-no" name="attending" value="No" required />
+              <label for="attending-no">Regretfully decline</label>
+            </div>
+          </div>
+        </div>
+
+        <div id="attending-fields" class="hidden">
+          <div class="form-row">
+            <label for="party-size">Total number of guests in your party (including you)</label>
+            <input type="number" id="party-size" name="partySize" min="1" max="10" value="1" />
+          </div>
+
+          <div id="guest-list"></div>
+
+          <div class="form-row">
+            <label for="notes">Anything else we should know?</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Song requests, accessibility needs, etc."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row" style="margin-top: 2rem;">
+          <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Send RSVP</button>
+        </div>
+
+        <div id="form-status" class="form-status"></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>With love, Aisling &amp; Karen <span class="heart">&hearts;</span></p>
+    <p>Questions? Reach out at [contact email or phone]</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/rsvp.js"></script>
+</body>
+</html>
