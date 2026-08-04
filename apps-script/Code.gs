@@ -13,6 +13,11 @@
  * page for search engines — it's not an official/documented API, so if
  * MyRegistry changes that markup this could stop working; you'll see an
  * error in the sync dialog if so.
+ *
+ * Guest list lookup: RSVP name lookup reads a separate spreadsheet
+ * (GUESTLIST_SPREADSHEET_ID) that must be shared with whichever Google
+ * account this script is deployed under — otherwise getGuestList_() throws
+ * and the RSVP page shows a "couldn't load" message instead of the lookup.
  */
 
 var SHEET_RSVP = "RSVP";
@@ -29,6 +34,15 @@ var FUNDS_HEADERS = [
 
 // Your public MyRegistry gift list URL.
 var MYREGISTRY_URL = "https://www.myregistry.com/giftlist/aislingandkaren";
+
+// Separate spreadsheet holding the seat-allocation guest list. Must be
+// shared (at least "Viewer") with whichever Google account this Apps
+// Script is deployed under, or getGuestList_() will throw.
+// Layout: Col A = lookup name, Col B = allocation (number of seats),
+// Col C onward = pre-named companions for that row (blank = unnamed
+// "plus one" the guest fills in themselves).
+var GUESTLIST_SPREADSHEET_ID = "1_VxA3ddaZFseHcxCuwwlOZHs4bph0NUWle16K3hdeEg";
+var GUESTLIST_SHEET_GID = 565261112;
 
 var REGISTRY_ITEMS_HEADERS = [
   "ID", "Category", "Name", "Description", "ImageURL",
@@ -101,6 +115,14 @@ function doGet(e) {
 
   if (action === "funds") {
     return jsonResponse_({ funds: getFunds_() });
+  }
+
+  if (action === "guestlist") {
+    try {
+      return jsonResponse_({ guests: getGuestList_() });
+    } catch (err) {
+      return jsonResponse_({ error: "Couldn't load the guest list: " + err.message });
+    }
   }
 
   return jsonResponse_({ error: "Unknown action" });
@@ -234,6 +256,39 @@ function getFunds_() {
   }
 
   return funds;
+}
+
+function getGuestList_() {
+  var guestSs = SpreadsheetApp.openById(GUESTLIST_SPREADSHEET_ID);
+  var sheet = guestSs.getSheets().filter(function (s) {
+    return s.getSheetId() === GUESTLIST_SHEET_GID;
+  })[0];
+
+  if (!sheet) {
+    throw new Error("Couldn't find the sheet tab with gid " + GUESTLIST_SHEET_GID + " in the guest list spreadsheet.");
+  }
+
+  var rows = sheet.getDataRange().getValues();
+  var guests = [];
+
+  for (var r = 1; r < rows.length; r++) {
+    var row = rows[r];
+    var name = row[0];
+    if (!name) continue;
+
+    var allocation = Number(row[1]) || 1;
+    var namedGuests = row.slice(2)
+      .map(function (v) { return String(v || "").trim(); })
+      .filter(Boolean);
+
+    guests.push({
+      name: String(name).trim(),
+      allocation: allocation,
+      namedGuests: namedGuests,
+    });
+  }
+
+  return guests;
 }
 
 function jsonResponse_(obj) {

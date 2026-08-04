@@ -40,9 +40,11 @@
     <div class="container">
       <form id="rsvp-form" class="form">
 
-        <div class="form-row">
+        <div class="form-row autocomplete">
           <label for="full-name">Your full name</label>
-          <input type="text" id="full-name" name="fullName" required autocomplete="name" />
+          <input type="text" id="full-name" name="fullName" required autocomplete="off" placeholder="Start typing your name as it appears on your invitation" />
+          <div id="name-dropdown" class="autocomplete-dropdown"></div>
+          <p id="name-hint" class="form-hint">We'll match this against your invitation to show your available party size.</p>
         </div>
 
         <div class="form-row">
@@ -68,7 +70,8 @@
         <div id="attending-fields" class="hidden">
           <div class="form-row">
             <label for="party-size">Total number of guests in your party (including you)</label>
-            <input type="number" id="party-size" name="partySize" min="1" max="10" value="1" />
+            <input type="number" id="party-size" name="partySize" min="1" max="1" value="1" />
+            <p class="form-hint">Capped at the number of seats on your invitation.</p>
           </div>
 
           <div id="guest-list"></div>

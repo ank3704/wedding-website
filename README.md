@@ -96,7 +96,34 @@ whatever number is currently there.
 Add as many funds as you like (honeymoon, baby fund, new home, etc.) —
 each row is its own card.
 
-## 4. Who claimed what (for thank-you notes)
+## 4. Seat-allocation name lookup on the RSVP form
+
+The RSVP page looks up each guest by name against a separate spreadsheet
+(not the main one from step 1) to show a dropdown of matching invitations
+and cap their party size at however many seats they were actually
+allocated.
+
+1. Open `apps-script/Code.gs` and confirm `GUESTLIST_SPREADSHEET_ID` and
+   `GUESTLIST_SHEET_GID` point at your guest list spreadsheet and tab
+   (the `gid=` number in that sheet's URL).
+2. **Share that spreadsheet** with whichever Google account the Apps
+   Script is deployed under (Viewer access is enough) — if it's not
+   shared, the lookup will fail with a "guest list is temporarily
+   unavailable" message on the RSVP page.
+3. Layout, one row per invitation:
+
+   | Column | Meaning |
+   |---|---|
+   | A | The name a guest would type to find themselves |
+   | B | Allocation — total seats for this invitation, e.g. `2` |
+   | C, D, E… | Pre-named companions, one per column (leave blank for an unnamed "plus one" the guest fills in themselves) |
+
+A guest who can't find their name (typo, or genuinely not on the list)
+is blocked from submitting until they find a real match — there's no
+"just type freely" fallback, so double-check names are spelled the way
+people are likely to type them.
+
+## 5. Who claimed what (for thank-you notes)
 
 For items you added directly in the Sheet (not synced from MyRegistry):
 
@@ -104,7 +131,7 @@ Every claim (guest clicking "I got this!") logs a row in the
 `RegistryClaims` tab with the item ID, name, and email. Cross-reference
 against `RegistryItems` to see who got what.
 
-## 5. Host the site for free
+## 6. Host the site for free
 
 Any static host works. Easiest options:
 
@@ -119,7 +146,7 @@ Any static host works. Easiest options:
 2. Repo Settings → Pages → set source to the `main` branch
 3. Your site is live at `https://<username>.github.io/<repo>`
 
-## 6. Content still to fill in
+## 7. Content still to fill in
 
 Text wrapped in `[brackets]` throughout `index.html`, `details.html`,
 `rsvp.html`, and `registry.html` is placeholder — names, date, venue,
